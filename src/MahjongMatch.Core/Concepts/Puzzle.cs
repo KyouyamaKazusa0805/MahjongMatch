@@ -47,6 +47,11 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 		{
 			// Collect all tiles and group them by its layer.
 			var tilesDictionary = new Dictionary<LayerIndex, List<PuzzleTile>>();
+			for (var i = (LayerIndex)0; i < _layers.Count; i++)
+			{
+				tilesDictionary.Add(i, []);
+			}
+
 			var result = new HashSet<PuzzleTile>();
 			for (var i = (LayerIndex)0; i < _layers.Count; i++)
 			{
@@ -55,10 +60,7 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 				{
 					var puzzleTile = new PuzzleTile(i, tile);
 					result.Add(puzzleTile);
-					if (!tilesDictionary.TryAdd(i, [puzzleTile]))
-					{
-						tilesDictionary[i].Add(puzzleTile);
-					}
+					tilesDictionary[i].Add(puzzleTile);
 				}
 			}
 
