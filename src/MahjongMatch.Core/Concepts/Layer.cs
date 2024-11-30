@@ -343,6 +343,30 @@ public sealed partial class Layer :
 	}
 
 
+	/// <summary>
+	/// Negates the expression <see cref="Count"/> != 0.
+	/// </summary>
+	/// <param name="value">The value.</param>
+	/// <returns>A <see cref="bool"/> result indicating that.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool operator !(Layer value) => value.Count == 0;
+
+	/// <summary>
+	/// Returns the expression <see cref="Count"/> != 0.
+	/// </summary>
+	/// <param name="value">The value.</param>
+	/// <returns>A <see cref="bool"/> result indicating that.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool operator true(Layer value) => value.Count != 0;
+
+	/// <summary>
+	/// Negates the expression <see cref="Count"/> != 0.
+	/// </summary>
+	/// <param name="value">The value.</param>
+	/// <returns>A <see cref="bool"/> result indicating that.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool operator false(Layer value) => value.Count == 0;
+
 	/// <inheritdoc/>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static bool operator ==(Layer? left, Layer? right)

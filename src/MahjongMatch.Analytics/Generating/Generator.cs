@@ -42,6 +42,11 @@ public readonly ref struct Generator()
 	/// </summary>
 	private readonly Random _random = new();
 
+	/// <summary>
+	/// Indicates the backing analyzer.
+	/// </summary>
+	private readonly Analyzer _analzyer = new();
+
 
 #pragma warning disable CS0809
 	/// <inheritdoc cref="Span{T}.Equals(object?)"/>
@@ -134,7 +139,7 @@ public readonly ref struct Generator()
 			}
 
 			// Check validity.
-			if (true)
+			if (_analzyer.Analyze(result).IsSolved)
 			{
 				return result;
 			}

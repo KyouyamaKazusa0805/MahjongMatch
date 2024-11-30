@@ -130,6 +130,24 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 
 
 	/// <summary>
+	/// Applies the specified match result into the puzzle.
+	/// </summary>
+	/// <param name="match">The match.</param>
+	/// <exception cref="InvalidOperationException">Throws when the match is not a same tile.</exception>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public void Apply(TileMatch match)
+	{
+		var ((l1, (t1, c1)), (l2, (t2, c2))) = match;
+		if (t1 != t2)
+		{
+			throw new InvalidOperationException("The match must be a same tile.");
+		}
+
+		this[l1].Remove(c1);
+		this[l2].Remove(c2);
+	}
+
+	/// <summary>
 	/// Clears all layers.
 	/// </summary>
 	public void Clear() => _layers.Clear();
@@ -297,6 +315,30 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 	/// <inheritdoc/>
 	IEnumerator<Layer> IEnumerable<Layer>.GetEnumerator() => ((IEnumerable<Layer>)_layers).GetEnumerator();
 
+
+	/// <summary>
+	/// Negates expression <see cref="Count"/> != 0.
+	/// </summary>
+	/// <param name="value">The puzzle to be checked.</param>
+	/// <returns>A <see cref="bool"/> result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool operator !(Puzzle value) => value.Count == 0;
+
+	/// <summary>
+	/// Returns expression value <see cref="Count"/> != 0.
+	/// </summary>
+	/// <param name="value">The puzzle to be checked.</param>
+	/// <returns>A <see cref="bool"/> result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool operator true(Puzzle value) => value.Count != 0;
+
+	/// <summary>
+	/// Negates expression <see cref="Count"/> != 0.
+	/// </summary>
+	/// <param name="value">The puzzle to be checked.</param>
+	/// <returns>A <see cref="bool"/> result.</returns>
+	[MethodImpl(MethodImplOptions.AggressiveInlining)]
+	public static bool operator false(Puzzle value) => value.Count == 0;
 
 	/// <inheritdoc/>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]

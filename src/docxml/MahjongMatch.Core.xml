@@ -375,6 +375,27 @@
         <member name="M:MahjongMatch.Concepts.Layer.System#Collections#Generic#IEnumerable{MahjongMatch#Concepts#LayerTile}#GetEnumerator">
             <inheritdoc/>
         </member>
+        <member name="M:MahjongMatch.Concepts.Layer.op_LogicalNot(MahjongMatch.Concepts.Layer)">
+            <summary>
+            Negates the expression <see cref="P:MahjongMatch.Concepts.Layer.Count"/> != 0.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>A <see cref="T:System.Boolean"/> result indicating that.</returns>
+        </member>
+        <member name="M:MahjongMatch.Concepts.Layer.op_True(MahjongMatch.Concepts.Layer)">
+            <summary>
+            Returns the expression <see cref="P:MahjongMatch.Concepts.Layer.Count"/> != 0.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>A <see cref="T:System.Boolean"/> result indicating that.</returns>
+        </member>
+        <member name="M:MahjongMatch.Concepts.Layer.op_False(MahjongMatch.Concepts.Layer)">
+            <summary>
+            Negates the expression <see cref="P:MahjongMatch.Concepts.Layer.Count"/> != 0.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>A <see cref="T:System.Boolean"/> result indicating that.</returns>
+        </member>
         <member name="M:MahjongMatch.Concepts.Layer.op_Equality(MahjongMatch.Concepts.Layer,MahjongMatch.Concepts.Layer)">
             <inheritdoc/>
         </member>
@@ -734,6 +755,13 @@
             <param name="index">The desired index.</param>
             <returns>The layer.</returns>
         </member>
+        <member name="M:MahjongMatch.Concepts.Puzzle.Apply(MahjongMatch.Concepts.TileMatch)">
+            <summary>
+            Applies the specified match result into the puzzle.
+            </summary>
+            <param name="match">The match.</param>
+            <exception cref="T:System.InvalidOperationException">Throws when the match is not a same tile.</exception>
+        </member>
         <member name="M:MahjongMatch.Concepts.Puzzle.Clear">
             <summary>
             Clears all layers.
@@ -819,6 +847,27 @@
         </member>
         <member name="M:MahjongMatch.Concepts.Puzzle.System#Collections#Generic#IEnumerable{MahjongMatch#Concepts#Layer}#GetEnumerator">
             <inheritdoc/>
+        </member>
+        <member name="M:MahjongMatch.Concepts.Puzzle.op_LogicalNot(MahjongMatch.Concepts.Puzzle)">
+            <summary>
+            Negates expression <see cref="P:MahjongMatch.Concepts.Puzzle.Count"/> != 0.
+            </summary>
+            <param name="value">The puzzle to be checked.</param>
+            <returns>A <see cref="T:System.Boolean"/> result.</returns>
+        </member>
+        <member name="M:MahjongMatch.Concepts.Puzzle.op_True(MahjongMatch.Concepts.Puzzle)">
+            <summary>
+            Returns expression value <see cref="P:MahjongMatch.Concepts.Puzzle.Count"/> != 0.
+            </summary>
+            <param name="value">The puzzle to be checked.</param>
+            <returns>A <see cref="T:System.Boolean"/> result.</returns>
+        </member>
+        <member name="M:MahjongMatch.Concepts.Puzzle.op_False(MahjongMatch.Concepts.Puzzle)">
+            <summary>
+            Negates expression <see cref="P:MahjongMatch.Concepts.Puzzle.Count"/> != 0.
+            </summary>
+            <param name="value">The puzzle to be checked.</param>
+            <returns>A <see cref="T:System.Boolean"/> result.</returns>
         </member>
         <member name="M:MahjongMatch.Concepts.Puzzle.op_Equality(MahjongMatch.Concepts.Puzzle,MahjongMatch.Concepts.Puzzle)">
             <inheritdoc/>
@@ -1153,54 +1202,9 @@
         <member name="P:MahjongMatch.Concepts.TileMatch.Tile2">
             <summary>Indicates the tile 2.</summary>
         </member>
-        <member name="T:MahjongMatch.Generating.Generator">
-            <summary>
-            Provides a generator.
-            </summary>
-        </member>
-        <member name="M:MahjongMatch.Generating.Generator.#ctor">
-            <summary>
-            Provides a generator.
-            </summary>
-        </member>
-        <member name="F:MahjongMatch.Generating.Generator.TileDistinctKeys">
-            <summary>
-            Indicates the tile distinct keys.
-            </summary>
-        </member>
-        <member name="F:MahjongMatch.Generating.Generator._flowers">
-            <summary>
-            Indicates flowers.
-            </summary>
-        </member>
-        <member name="F:MahjongMatch.Generating.Generator._seasons">
-            <summary>
-            Indicates seasons.
-            </summary>
-        </member>
-        <member name="F:MahjongMatch.Generating.Generator._random">
-            <summary>
-            Indicates the backing random number generator.
-            </summary>
-        </member>
-        <member name="M:MahjongMatch.Generating.Generator.Equals(System.Object)">
-            <inheritdoc cref="M:System.Span`1.Equals(System.Object)"/>
-        </member>
-        <member name="M:MahjongMatch.Generating.Generator.GetHashCode">
-            <inheritdoc cref="M:System.Span`1.Equals(System.Object)"/>
-        </member>
-        <member name="M:MahjongMatch.Generating.Generator.ToString">
-            <inheritdoc cref="M:System.Span`1.Equals(System.Object)"/>
-        </member>
-        <member name="M:MahjongMatch.Generating.Generator.Generate(MahjongMatch.Concepts.Puzzle,System.Threading.CancellationToken)">
-            <summary>
-            Try to generate a puzzle via the pattern.
-            </summary>
-            <param name="pattern">
-            The pattern; although the target type is <see cref="T:MahjongMatch.Concepts.Puzzle"/>, it may not require any tiles predefined.
-            </param>
-            <param name="cancellationToken">The cancellation token that can cancel the current operation.</param>
-            <returns>The puzzle; or <see langword="null"/> if cancelled.</returns>
+        <member name="M:MahjongMatch.Concepts.TileMatch.ToString">
+            <inheritdoc cref="M:System.Object.ToString"/>
+            <exception cref="T:System.InvalidOperationException">Throws when the tiles are not same.</exception>
         </member>
         <member name="T:MahjongMatch.Linq.LayerEnumerable">
             <summary>
