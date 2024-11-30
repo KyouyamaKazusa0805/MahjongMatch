@@ -12,8 +12,6 @@ public readonly record struct TileMatch(PuzzleTile Tile1, PuzzleTile Tile2) : IE
 	public override string ToString()
 	{
 		_ = this is (var (l1, (t1, (x1, y1))), var (l2, (t2, (x2, y2))));
-		return t1 == t2
-			? $"{t1} in layer {l1} & {l2}, coordinate ({x1}, {y1}) & ({x2}, {y2})"
-			: throw new InvalidOperationException("The paired values must be a same kind of tile.");
+		return $"{t1} & {t2} in layer {l1} & {l2}, coordinate ({x1}, {y1}) & ({x2}, {y2})";
 	}
 }

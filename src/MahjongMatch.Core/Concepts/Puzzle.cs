@@ -91,6 +91,11 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 					var (leftIsBlocked, rightIsBlocked) = (false, false);
 					foreach (var sameLayerTile in tilesDictionary[tile.Layer])
 					{
+						if (sameLayerTile == tile)
+						{
+							continue;
+						}
+
 						if (sameLayerTile.IsLeftNextTo(tile))
 						{
 							leftIsBlocked = true;
@@ -137,12 +142,7 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public void Apply(TileMatch match)
 	{
-		var ((l1, (t1, c1)), (l2, (t2, c2))) = match;
-		if (t1 != t2)
-		{
-			throw new InvalidOperationException("The match must be a same tile.");
-		}
-
+		var ((l1, (_, c1)), (l2, (_, c2))) = match;
 		this[l1].Remove(c1);
 		this[l2].Remove(c2);
 	}
@@ -275,7 +275,7 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 	public ReadOnlySpan<TileMatch> GetAllMatches()
 	{
 		var result = new List<TileMatch>();
-		foreach (var tileGroup in from element in AvailableTiles group element by element.Tile.Tile)
+		foreach (var tileGroup in from element in AvailableTiles group element by element.Tile.TileKey)
 		{
 			if (tileGroup.Length < 2)
 			{
@@ -317,28 +317,28 @@ public sealed partial class Puzzle(params List<Layer> layers) :
 
 
 	/// <summary>
-	/// Negates expression <see cref="Count"/> != 0.
+	/// Negates expression <see cref="ItemsCount"/> != 0.
 	/// </summary>
 	/// <param name="value">The puzzle to be checked.</param>
 	/// <returns>A <see cref="bool"/> result.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static bool operator !(Puzzle value) => value.Count == 0;
+	public static bool operator !(Puzzle value) => value.ItemsCount == 0;
 
 	/// <summary>
-	/// Returns expression value <see cref="Count"/> != 0.
+	/// Returns expression value <see cref="ItemsCount"/> != 0.
 	/// </summary>
 	/// <param name="value">The puzzle to be checked.</param>
 	/// <returns>A <see cref="bool"/> result.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static bool operator true(Puzzle value) => value.Count != 0;
+	public static bool operator true(Puzzle value) => value.ItemsCount != 0;
 
 	/// <summary>
-	/// Negates expression <see cref="Count"/> != 0.
+	/// Negates expression <see cref="ItemsCount"/> != 0.
 	/// </summary>
 	/// <param name="value">The puzzle to be checked.</param>
 	/// <returns>A <see cref="bool"/> result.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static bool operator false(Puzzle value) => value.Count == 0;
+	public static bool operator false(Puzzle value) => value.ItemsCount == 0;
 
 	/// <inheritdoc/>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]

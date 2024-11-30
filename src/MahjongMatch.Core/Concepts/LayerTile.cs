@@ -38,6 +38,17 @@ public struct LayerTile(int mask) : IEquatable<LayerTile>, IEqualityOperators<La
 		internal set => _mask |= value.AsMask();
 	}
 
+	/// <summary>
+	/// Indicates the tile key in order to distinct different kinds of tiles that cannot be matched.
+	/// </summary>
+	public readonly Tile TileKey
+		=> Tile switch
+		{
+			{ Kind: TileKind.Season } => Tile.Season(1),
+			{ Kind: TileKind.Flower } => Tile.Flower(1),
+			_ => Tile
+		};
+
 
 	/// <summary>
 	/// Deconstruct the instance into multiple variables.

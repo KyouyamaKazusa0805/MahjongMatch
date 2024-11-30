@@ -79,10 +79,10 @@ public readonly record struct Coordinate(int X, int Y) :
 	///      '--'
 	///    t1 t2
 	/// </code>
-	/// From two cases, we can know that the X coordinate value satisfies the equation <c>|x1 - x2| &lt;= 2</c>,
-	/// and Y coordinate value satisfies the equation <c>|y1 - y2| &lt;= 1</c>.
+	/// From two cases, we can know that the X coordinate value satisfies the equation <c>|x1 - x2| &lt;= 1</c>,
+	/// and Y coordinate value satisfies the equation <c>|y1 - y2| &lt;= 2</c>.
 	/// </remarks>
-	public bool IsNextTo(Coordinate other) => Math.Abs(X - other.X) <= 2 && Math.Abs(Y - other.Y) <= 1;
+	public bool IsNextTo(Coordinate other) => Math.Abs(X - other.X) <= 1 && Math.Abs(Y - other.Y) <= 2;
 
 	/// <inheritdoc/>
 	public int CompareTo(Coordinate other) => X.CompareTo(other.X) is var r and not 0 ? r : Y.CompareTo(other.Y);
