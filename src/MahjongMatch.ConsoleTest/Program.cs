@@ -109,7 +109,7 @@ Puzzle pattern = [
 		new(default, new(16, 8))
 	]
 ];
-Console.WriteLine(pattern.ToString());
+//Console.WriteLine(pattern.ToString());
 
 var generator = new Generator();
 Console.WriteLine(generator.Generate(pattern));

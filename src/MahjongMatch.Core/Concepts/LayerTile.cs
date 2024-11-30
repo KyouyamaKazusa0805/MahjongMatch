@@ -33,9 +33,9 @@ public struct LayerTile(int mask) : IEquatable<LayerTile>, IEqualityOperators<La
 	/// </summary>
 	public Tile Tile
 	{
-		readonly get => new((short)(_mask & (1 << 16) - 1));
+		readonly get => new((ushort)(_mask & (1 << 16) - 1));
 
-		internal set => _mask |= (ushort)value.AsMask();
+		internal set => _mask |= value.AsMask();
 	}
 
 
@@ -82,21 +82,4 @@ public struct LayerTile(int mask) : IEquatable<LayerTile>, IEqualityOperators<La
 	/// <inheritdoc/>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
 	public static bool operator !=(LayerTile left, LayerTile right) => !(left == right);
-
-
-	/// <summary>
-	/// Implicit cast from the <see cref="LayerTile"/> instance to <see cref="KeyValuePair{TKey, TValue}"/>
-	/// of <see cref="Concepts.Tile"/> and <see cref="Concepts.Coordinate"/>.
-	/// </summary>
-	/// <param name="value">The value.</param>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static implicit operator KeyValuePair<Tile, Coordinate>(LayerTile value) => KeyValuePair.Create(value.Tile, value.Coordinate);
-
-	/// <summary>
-	/// Implicit cast from the <see cref="KeyValuePair{TKey, TValue}"/>
-	/// of <see cref="Concepts.Tile"/> and <see cref="Concepts.Coordinate"/> instance to <see cref="LayerTile"/>.
-	/// </summary>
-	/// <param name="value">The value.</param>
-	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public static implicit operator LayerTile(KeyValuePair<Tile, Coordinate> value) => new(value.Key, value.Value);
 }

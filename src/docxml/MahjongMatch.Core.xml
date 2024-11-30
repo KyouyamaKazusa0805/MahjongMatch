@@ -544,20 +544,6 @@
         <member name="M:MahjongMatch.Concepts.LayerTile.op_Inequality(MahjongMatch.Concepts.LayerTile,MahjongMatch.Concepts.LayerTile)">
             <inheritdoc/>
         </member>
-        <member name="M:MahjongMatch.Concepts.LayerTile.op_Implicit(MahjongMatch.Concepts.LayerTile)~System.Collections.Generic.KeyValuePair{MahjongMatch.Concepts.Tile,MahjongMatch.Concepts.Coordinate}">
-            <summary>
-            Implicit cast from the <see cref="T:MahjongMatch.Concepts.LayerTile"/> instance to <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
-            of <see cref="T:MahjongMatch.Concepts.Tile"/> and <see cref="T:MahjongMatch.Concepts.Coordinate"/>.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
-        <member name="M:MahjongMatch.Concepts.LayerTile.op_Implicit(System.Collections.Generic.KeyValuePair{MahjongMatch.Concepts.Tile,MahjongMatch.Concepts.Coordinate})~MahjongMatch.Concepts.LayerTile">
-            <summary>
-            Implicit cast from the <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
-            of <see cref="T:MahjongMatch.Concepts.Tile"/> and <see cref="T:MahjongMatch.Concepts.Coordinate"/> instance to <see cref="T:MahjongMatch.Concepts.LayerTile"/>.
-            </summary>
-            <param name="value">The value.</param>
-        </member>
         <member name="T:MahjongMatch.Concepts.Primitives.FlowerKind">
             <summary>
             Represents a flower kind.
@@ -1002,7 +988,7 @@
             </summary>
             <param name="mask">Indicates the backing mask.</param>
         </member>
-        <member name="M:MahjongMatch.Concepts.Tile.#ctor(System.Int16)">
+        <member name="M:MahjongMatch.Concepts.Tile.#ctor(System.UInt16)">
             <summary>
             Represents a mahjong tile.
             </summary>
@@ -1026,6 +1012,11 @@
         <member name="P:MahjongMatch.Concepts.Tile.IsSuit">
             <summary>
             Indicates whether the tile is suit (bamboo, character or dot).
+            </summary>
+        </member>
+        <member name="P:MahjongMatch.Concepts.Tile.IsSingleton">
+            <summary>
+            Indicates whether the tile is singleton (flower or season).
             </summary>
         </member>
         <member name="P:MahjongMatch.Concepts.Tile.Rank">
@@ -1172,14 +1163,19 @@
             Provides a generator.
             </summary>
         </member>
-        <member name="F:MahjongMatch.Generating.Generator.Tiles">
+        <member name="F:MahjongMatch.Generating.Generator.TileDistinctKeys">
             <summary>
-            Indicates all possible tiles.
+            Indicates the tile distinct keys.
             </summary>
         </member>
-        <member name="F:MahjongMatch.Generating.Generator.TilesStartIndices">
+        <member name="F:MahjongMatch.Generating.Generator._flowers">
             <summary>
-            The start indices of different tiles.
+            Indicates flowers.
+            </summary>
+        </member>
+        <member name="F:MahjongMatch.Generating.Generator._seasons">
+            <summary>
+            Indicates seasons.
             </summary>
         </member>
         <member name="F:MahjongMatch.Generating.Generator._random">

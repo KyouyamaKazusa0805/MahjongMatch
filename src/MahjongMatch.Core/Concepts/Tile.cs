@@ -4,18 +4,18 @@
 /// Represents a mahjong tile.
 /// </summary>
 /// <param name="mask">Indicates the backing mask.</param>
-public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<Tile, Tile, bool>
+public readonly struct Tile(ushort mask) : IEquatable<Tile>, IEqualityOperators<Tile, Tile, bool>
 {
 	/// <summary>
 	/// Indicates the maximum value bits.
 	/// </summary>
-	private const short MaxValueBits = 511;
+	private const ushort MaxValueBits = 511;
 
 
 	/// <summary>
 	/// Indicates the backing mask.
 	/// </summary>
-	private readonly short _mask = mask;
+	private readonly ushort _mask = mask;
 
 
 	/// <summary>
@@ -27,6 +27,11 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	/// Indicates whether the tile is suit (bamboo, character or dot).
 	/// </summary>
 	public bool IsSuit => Kind is TileKind.Bamboo or TileKind.Character or TileKind.Dot;
+
+	/// <summary>
+	/// Indicates whether the tile is singleton (flower or season).
+	/// </summary>
+	public bool IsSingleton => Kind is TileKind.Flower or TileKind.Season;
 
 	/// <summary>
 	/// Indicates the target rank (value).
@@ -53,7 +58,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	/// </summary>
 	/// <returns>The mask.</returns>
 	[MethodImpl(MethodImplOptions.AggressiveInlining)]
-	public short AsMask() => _mask;
+	public ushort AsMask() => _mask;
 
 	/// <inheritdoc cref="object.ToString"/>
 	public override string ToString()
@@ -107,7 +112,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Bamboo(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 9);
-		return new((short)((int)TileKind.Bamboo << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Bamboo << 9 | 1 << (rank - 1)));
 	}
 
 	/// <summary>
@@ -120,7 +125,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Character(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 9);
-		return new((short)((int)TileKind.Character << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Character << 9 | 1 << (rank - 1)));
 	}
 
 	/// <summary>
@@ -133,7 +138,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Dot(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 9);
-		return new((short)((int)TileKind.Dot << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Dot << 9 | 1 << (rank - 1)));
 	}
 
 	/// <summary>
@@ -146,7 +151,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Wind(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 4);
-		return new((short)((int)TileKind.Wind << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Wind << 9 | 1 << (rank - 1)));
 	}
 
 	/// <inheritdoc cref="Wind(int)"/>
@@ -163,7 +168,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Wrigley(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 3);
-		return new((short)((int)TileKind.Wrigley << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Wrigley << 9 | 1 << (rank - 1)));
 	}
 
 	/// <inheritdoc cref="Wrigley(int)"/>
@@ -180,7 +185,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Flower(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 4);
-		return new((short)((int)TileKind.Flower << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Flower << 9 | 1 << (rank - 1)));
 	}
 
 	/// <inheritdoc cref="Flower(int)"/>
@@ -197,7 +202,7 @@ public readonly struct Tile(short mask) : IEquatable<Tile>, IEqualityOperators<T
 	public static Tile Season(int rank)
 	{
 		ArgumentOutOfRangeException.ThrowIfGreaterThan(rank, 4);
-		return new((short)((int)TileKind.Season << 9 | 1 << (rank - 1)));
+		return new((ushort)((int)TileKind.Season << 9 | 1 << (rank - 1)));
 	}
 
 	/// <inheritdoc cref="Season(int)"/>
